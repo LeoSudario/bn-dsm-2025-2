@@ -1,5 +1,26 @@
+# dependencies
 node_modules
-# Keep environment variables out of version control
-.env
+/.pnp
+.pnp.js
 
-/generated/prisma
+# testing
+/coverage
+
+# production
+/dist
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# eslint
+.eslintcache
+
+# dotenv
+.env
