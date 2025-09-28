@@ -5,6 +5,7 @@ import logger from 'morgan';
 import indexRouter from './routes/index.js';
 import usersRouter from './routes/users.js';
 import categoriasRouter from './routes/categorias.js'; // Import categoriasRouter
+import clientesRouter from './routes/clientes.js'
 
 const app = express();
 
@@ -18,5 +19,6 @@ app.use(cookieParser()); // Parse cookies
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/categorias', categoriasRouter);  // Register categoriasRouter
+app.use('/clientes', clientesRouter)
 
 export default app;
