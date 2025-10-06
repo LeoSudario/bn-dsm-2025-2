@@ -118,6 +118,22 @@ exports.Prisma.CategoriaScalarFieldEnum = {
   descricao: 'descricao'
 };
 
+exports.Prisma.ClienteScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  cpf: 'cpf',
+  data_nascimento: 'data_nascimento',
+  email: 'email',
+  logradouro: 'logradouro',
+  num_imovel: 'num_imovel',
+  complemento: 'complemento',
+  bairro: 'bairro',
+  municipio: 'municipio',
+  uf: 'uf',
+  cep: 'cep',
+  celular: 'celular'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -130,7 +146,8 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  Categoria: 'Categoria'
+  Categoria: 'Categoria',
+  Cliente: 'Cliente'
 };
 
 /**
