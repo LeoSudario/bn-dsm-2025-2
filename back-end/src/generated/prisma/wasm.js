@@ -106,6 +106,22 @@ exports.Prisma.ClienteScalarFieldEnum = {
   celular: 'celular'
 };
 
+exports.Prisma.FornecedorScalarFieldEnum = {
+  id: 'id',
+  razao_social: 'razao_social',
+  nome_fantasia: 'nome_fantasia',
+  cnpj: 'cnpj',
+  email: 'email',
+  logradouro: 'logradouro',
+  num_casa: 'num_casa',
+  complemento: 'complemento',
+  bairro: 'bairro',
+  municipio: 'municipio',
+  uf: 'uf',
+  cep: 'cep',
+  celular: 'celular'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -119,7 +135,8 @@ exports.Prisma.QueryMode = {
 
 exports.Prisma.ModelName = {
   Categoria: 'Categoria',
-  Cliente: 'Cliente'
+  Cliente: 'Cliente',
+  Fornecedor: 'Fornecedor'
 };
 /**
  * Create the Client
@@ -169,13 +186,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// Nomes de model no Prisma devem estar\n// no singular e iniciar com LetraMaiúscula\nmodel Categoria {\n  id        String @id @default(auto()) @map(\"_id\") @db.ObjectId\n  descricao String\n}\n\nmodel Cliente {\n  id              String    @id @default(auto()) @map(\"_id\") @db.ObjectId\n  nome            String\n  cpf             String    @unique // Não pode se repetir na coleção\n  data_nascimento DateTime? // opcional\n  email           String    @unique\n  logradouro      String\n  num_imovel      String\n  complemento     String? // opcional\n  bairro          String\n  municipio       String\n  uf              String\n  cep             String\n  celular         String\n}\n",
-  "inlineSchemaHash": "46e5f7a745c8f017183eed4d42ad0c5861f0fe07dfe282ef893ad80662c5ef16",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// Nomes de model no Prisma devem estar\n// no singular e iniciar com LetraMaiúscula\nmodel Categoria {\n  id        String @id @default(auto()) @map(\"_id\") @db.ObjectId\n  descricao String\n}\n\nmodel Cliente {\n  id              String    @id @default(auto()) @map(\"_id\") @db.ObjectId\n  nome            String\n  cpf             String    @unique // Não pode se repetir na coleção\n  data_nascimento DateTime? // opcional\n  email           String    @unique\n  logradouro      String\n  num_imovel      String\n  complemento     String? // opcional\n  bairro          String\n  municipio       String\n  uf              String\n  cep             String\n  celular         String\n}\n\nmodel Fornecedor {\n  id            String  @id @default(auto()) @map(\"_id\") @db.ObjectId\n  razao_social  String\n  nome_fantasia String?\n  cnpj          String  @unique\n  email         String  @unique\n  logradouro    String\n  num_casa      String\n  complemento   String?\n  bairro        String\n  municipio     String\n  uf            String\n  cep           String\n  celular       String\n}\n",
+  "inlineSchemaHash": "186f43fc21b294421278e41fd498dcbd774131e859ec2a4285aa8356edff847f",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Categoria\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"descricao\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Cliente\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cpf\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"data_nascimento\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"logradouro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"num_imovel\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"complemento\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bairro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"municipio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"uf\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cep\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"celular\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Categoria\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"descricao\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Cliente\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cpf\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"data_nascimento\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"logradouro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"num_imovel\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"complemento\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bairro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"municipio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"uf\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cep\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"celular\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Fornecedor\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"razao_social\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nome_fantasia\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cnpj\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"logradouro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"num_casa\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"complemento\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bairro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"municipio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"uf\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cep\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"celular\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
