@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.16.1
- * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
+ * Prisma Client JS version: 6.17.0
+ * Query Engine version: c0aafc03b8ef6cdced8654b9a817999e02457d6a
  */
 Prisma.prismaVersion = {
-  client: "6.16.1",
-  engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
+  client: "6.17.0",
+  engine: "c0aafc03b8ef6cdced8654b9a817999e02457d6a"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -150,6 +150,13 @@ exports.Prisma.FornecedorScalarFieldEnum = {
   celular: 'celular'
 };
 
+exports.Prisma.PedidoScalarFieldEnum = {
+  id: 'id',
+  num_pedido: 'num_pedido',
+  data_hora: 'data_hora',
+  cliente_id: 'cliente_id'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -164,7 +171,8 @@ exports.Prisma.QueryMode = {
 exports.Prisma.ModelName = {
   Categoria: 'Categoria',
   Cliente: 'Cliente',
-  Fornecedor: 'Fornecedor'
+  Fornecedor: 'Fornecedor',
+  Pedido: 'Pedido'
 };
 
 /**

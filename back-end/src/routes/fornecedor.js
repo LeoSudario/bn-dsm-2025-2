@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import controller from '../controllers/Fornecedor'
+import controller from '../controllers/fornecedores.js'
 
 const router = Router()
 
@@ -14,8 +14,5 @@ router.get('/:id', controller.retrieveOne)
 router.put('/:id', controller.update)
 
 router.delete('/:id', controller.delete)
-
-router.get('/:id', controller.retrieveOne)
-
 
 export default router
