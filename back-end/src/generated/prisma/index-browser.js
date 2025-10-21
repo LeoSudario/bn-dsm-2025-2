@@ -20,12 +20,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.17.0
- * Query Engine version: c0aafc03b8ef6cdced8654b9a817999e02457d6a
+ * Prisma Client JS version: 6.16.1
+ * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
  */
 Prisma.prismaVersion = {
-  client: "6.17.0",
-  engine: "c0aafc03b8ef6cdced8654b9a817999e02457d6a"
+  client: "6.16.1",
+  engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -147,7 +147,8 @@ exports.Prisma.FornecedorScalarFieldEnum = {
   municipio: 'municipio',
   uf: 'uf',
   cep: 'cep',
-  celular: 'celular'
+  celular: 'celular',
+  produto_ids: 'produto_ids'
 };
 
 exports.Prisma.PedidoScalarFieldEnum = {
@@ -155,6 +156,19 @@ exports.Prisma.PedidoScalarFieldEnum = {
   num_pedido: 'num_pedido',
   data_hora: 'data_hora',
   cliente_id: 'cliente_id'
+};
+
+exports.Prisma.ProdutoScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  marca: 'marca',
+  detalhes: 'detalhes',
+  quantidade: 'quantidade',
+  unidade_medida: 'unidade_medida',
+  preco_unitario: 'preco_unitario',
+  qtd_estoque: 'qtd_estoque',
+  categoria_id: 'categoria_id',
+  fornecedor_ids: 'fornecedor_ids'
 };
 
 exports.Prisma.SortOrder = {
@@ -172,7 +186,8 @@ exports.Prisma.ModelName = {
   Categoria: 'Categoria',
   Cliente: 'Cliente',
   Fornecedor: 'Fornecedor',
-  Pedido: 'Pedido'
+  Pedido: 'Pedido',
+  Produto: 'Produto'
 };
 
 /**

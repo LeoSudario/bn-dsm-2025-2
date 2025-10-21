@@ -35,12 +35,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 6.17.0
- * Query Engine version: c0aafc03b8ef6cdced8654b9a817999e02457d6a
+ * Prisma Client JS version: 6.16.1
+ * Query Engine version: 1c57fdcd7e44b29b9313256c76699e91c3ac3c43
  */
 Prisma.prismaVersion = {
-  client: "6.17.0",
-  engine: "c0aafc03b8ef6cdced8654b9a817999e02457d6a"
+  client: "6.16.1",
+  engine: "1c57fdcd7e44b29b9313256c76699e91c3ac3c43"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -119,7 +119,8 @@ exports.Prisma.FornecedorScalarFieldEnum = {
   municipio: 'municipio',
   uf: 'uf',
   cep: 'cep',
-  celular: 'celular'
+  celular: 'celular',
+  produto_ids: 'produto_ids'
 };
 
 exports.Prisma.PedidoScalarFieldEnum = {
@@ -127,6 +128,19 @@ exports.Prisma.PedidoScalarFieldEnum = {
   num_pedido: 'num_pedido',
   data_hora: 'data_hora',
   cliente_id: 'cliente_id'
+};
+
+exports.Prisma.ProdutoScalarFieldEnum = {
+  id: 'id',
+  nome: 'nome',
+  marca: 'marca',
+  detalhes: 'detalhes',
+  quantidade: 'quantidade',
+  unidade_medida: 'unidade_medida',
+  preco_unitario: 'preco_unitario',
+  qtd_estoque: 'qtd_estoque',
+  categoria_id: 'categoria_id',
+  fornecedor_ids: 'fornecedor_ids'
 };
 
 exports.Prisma.SortOrder = {
@@ -144,7 +158,8 @@ exports.Prisma.ModelName = {
   Categoria: 'Categoria',
   Cliente: 'Cliente',
   Fornecedor: 'Fornecedor',
-  Pedido: 'Pedido'
+  Pedido: 'Pedido',
+  Produto: 'Produto'
 };
 /**
  * Create the Client
@@ -157,7 +172,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "C:\\Users\\leono\\OneDrive\\Área de Trabalho\\dsm\\bn-dsm-2025-2\\back-end\\src\\generated\\prisma",
+      "value": "C:\\Users\\1091392423006\\Desktop\\bn-dsm-2025-2\\bn-dsm-2025-2\\back-end\\src\\generated\\prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -171,15 +186,16 @@ const config = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "C:\\Users\\leono\\OneDrive\\Área de Trabalho\\dsm\\bn-dsm-2025-2\\back-end\\prisma\\schema.prisma",
+    "sourceFilePath": "C:\\Users\\1091392423006\\Desktop\\bn-dsm-2025-2\\bn-dsm-2025-2\\back-end\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null
+    "rootEnvPath": null,
+    "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
-  "clientVersion": "6.17.0",
-  "engineVersion": "c0aafc03b8ef6cdced8654b9a817999e02457d6a",
+  "clientVersion": "6.16.1",
+  "engineVersion": "1c57fdcd7e44b29b9313256c76699e91c3ac3c43",
   "datasourceNames": [
     "db"
   ],
@@ -193,13 +209,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// Nomes de model no Prisma devem estar\n// no singular e iniciar com LetraMaiúscula\nmodel Categoria {\n  id        String @id @default(auto()) @map(\"_id\") @db.ObjectId\n  descricao String\n}\n\nmodel Cliente {\n  id              String    @id @default(auto()) @map(\"_id\") @db.ObjectId\n  nome            String\n  cpf             String    @unique // Não pode se repetir na coleção\n  data_nascimento DateTime? // opcional\n  email           String    @unique\n  logradouro      String\n  num_imovel      String\n  complemento     String? // opcional\n  bairro          String\n  municipio       String\n  uf              String\n  cep             String\n  celular         String\n  pedidos         Pedido[]\n}\n\nmodel Fornecedor {\n  id            String  @id @default(auto()) @map(\"_id\") @db.ObjectId\n  razao_social  String\n  nome_fantasia String?\n  cnpj          String  @unique\n  email         String  @unique\n  logradouro    String\n  num_casa      String\n  complemento   String?\n  bairro        String\n  municipio     String\n  uf            String\n  cep           String\n  celular       String\n}\n\nmodel Pedido {\n  id         String   @id @default(auto()) @map(\"_id\") @db.ObjectId\n  num_pedido Int      @unique\n  data_hora  DateTime @default(now())\n  cliente_id String   @db.ObjectId\n  cliente    Cliente  @relation(fields: [cliente_id], references: [id])\n}\n",
-  "inlineSchemaHash": "07e44a5d6fafcca07c087f71eaa7d0c17c48f230338ea0c2fc160fee9160624c",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"mongodb\"\n  url      = env(\"DATABASE_URL\")\n}\n\n// Nomes de model no Prisma devem estar\n// no singular e iniciar com LetraMaiúscula\nmodel Categoria {\n  id        String    @id @default(auto()) @map(\"_id\") @db.ObjectId\n  descricao String\n  produtos  Produto[]\n}\n\nmodel Cliente {\n  id              String    @id @default(auto()) @map(\"_id\") @db.ObjectId\n  nome            String\n  cpf             String    @unique // Não pode se repetir na coleção\n  data_nascimento DateTime? // opcional\n  email           String    @unique\n  logradouro      String\n  num_imovel      String\n  complemento     String? // opcional\n  bairro          String\n  municipio       String\n  uf              String\n  cep             String\n  celular         String\n  pedidos         Pedido[]\n}\n\nmodel Fornecedor {\n  id            String    @id @default(auto()) @map(\"_id\") @db.ObjectId\n  razao_social  String\n  nome_fantasia String?\n  cnpj          String    @unique\n  email         String    @unique\n  logradouro    String\n  num_casa      String\n  complemento   String?\n  bairro        String\n  municipio     String\n  uf            String\n  cep           String\n  celular       String\n  produtos      Produto[] @relation(fields: [produto_ids], references: [id])\n  produto_ids   String[]  @db.ObjectId\n}\n\nmodel Pedido {\n  id         String   @id @default(auto()) @map(\"_id\") @db.ObjectId\n  num_pedido Int      @unique\n  data_hora  DateTime @default(now())\n  cliente_id String   @db.ObjectId\n  cliente    Cliente  @relation(fields: [cliente_id], references: [id])\n}\n\nmodel Produto {\n  id             String       @id @default(auto()) @map(\"_id\") @db.ObjectId\n  nome           String\n  marca          String\n  detalhes       String?\n  quantidade     Float\n  unidade_medida String\n  preco_unitario Float\n  qtd_estoque    Float\n  categoria_id   String       @db.ObjectId\n  categoria      Categoria    @relation(fields: [categoria_id], references: [id])\n  fornecedores   Fornecedor[] @relation(fields: [fornecedor_ids], references: [id])\n  fornecedor_ids String[]     @db.ObjectId\n}\n",
+  "inlineSchemaHash": "cb4b8cf6c5fbf7d90f1dbea3c51ed91c3cdee8b4c31dded28c6a6160ba74e6d7",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Categoria\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"descricao\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Cliente\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cpf\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"data_nascimento\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"logradouro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"num_imovel\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"complemento\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bairro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"municipio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"uf\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cep\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"celular\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pedidos\",\"kind\":\"object\",\"type\":\"Pedido\",\"relationName\":\"ClienteToPedido\"}],\"dbName\":null},\"Fornecedor\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"razao_social\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nome_fantasia\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cnpj\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"logradouro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"num_casa\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"complemento\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bairro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"municipio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"uf\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cep\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"celular\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Pedido\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"num_pedido\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"data_hora\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"cliente_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cliente\",\"kind\":\"object\",\"type\":\"Cliente\",\"relationName\":\"ClienteToPedido\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Categoria\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"descricao\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"produtos\",\"kind\":\"object\",\"type\":\"Produto\",\"relationName\":\"CategoriaToProduto\"}],\"dbName\":null},\"Cliente\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cpf\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"data_nascimento\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"logradouro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"num_imovel\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"complemento\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bairro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"municipio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"uf\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cep\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"celular\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pedidos\",\"kind\":\"object\",\"type\":\"Pedido\",\"relationName\":\"ClienteToPedido\"}],\"dbName\":null},\"Fornecedor\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"razao_social\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nome_fantasia\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cnpj\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"logradouro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"num_casa\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"complemento\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"bairro\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"municipio\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"uf\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cep\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"celular\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"produtos\",\"kind\":\"object\",\"type\":\"Produto\",\"relationName\":\"FornecedorToProduto\"},{\"name\":\"produto_ids\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Pedido\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"num_pedido\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"data_hora\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"cliente_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"cliente\",\"kind\":\"object\",\"type\":\"Cliente\",\"relationName\":\"ClienteToPedido\"}],\"dbName\":null},\"Produto\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"_id\"},{\"name\":\"nome\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"marca\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"detalhes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quantidade\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"unidade_medida\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"preco_unitario\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"qtd_estoque\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"categoria_id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"categoria\",\"kind\":\"object\",\"type\":\"Categoria\",\"relationName\":\"CategoriaToProduto\"},{\"name\":\"fornecedores\",\"kind\":\"object\",\"type\":\"Fornecedor\",\"relationName\":\"FornecedorToProduto\"},{\"name\":\"fornecedor_ids\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

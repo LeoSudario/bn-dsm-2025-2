@@ -7,6 +7,7 @@ import usersRouter from './routes/users.js';
 import categoriasRouter from './routes/categorias.js'; // Import categoriasRouter
 import clientesRouter from './routes/clientes.js'
 import fornecedorRouter from './routes/fornecedor.js';
+import produtoRouter from './routes/produto.js'
 
 const app = express();
 
@@ -22,4 +23,5 @@ app.use('/users', usersRouter);
 app.use('/categorias', categoriasRouter);  // Register categoriasRouter
 app.use('/clientes', clientesRouter)
 app.use('/fornecedores', fornecedorRouter);
+app.use('/produto', produtoRouter);
 export default app;

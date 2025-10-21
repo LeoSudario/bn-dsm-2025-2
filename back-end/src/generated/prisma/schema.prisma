@@ -17,8 +17,9 @@ datasource db {
 // Nomes de model no Prisma devem estar
 // no singular e iniciar com LetraMaiúscula
 model Categoria {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
   descricao String
+  produtos  Produto[]
 }
 
 model Cliente {
@@ -39,11 +40,11 @@ model Cliente {
 }
 
 model Fornecedor {
-  id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
   razao_social  String
   nome_fantasia String?
-  cnpj          String  @unique
-  email         String  @unique
+  cnpj          String    @unique
+  email         String    @unique
   logradouro    String
   num_casa      String
   complemento   String?
@@ -52,6 +53,8 @@ model Fornecedor {
   uf            String
   cep           String
   celular       String
+  produtos      Produto[] @relation(fields: [produto_ids], references: [id])
+  produto_ids   String[]  @db.ObjectId
 }
 
 model Pedido {
@@ -60,4 +63,19 @@ model Pedido {
   data_hora  DateTime @default(now())
   cliente_id String   @db.ObjectId
   cliente    Cliente  @relation(fields: [cliente_id], references: [id])
+}
+
+model Produto {
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
+  nome           String
+  marca          String
+  detalhes       String?
+  quantidade     Float
+  unidade_medida String
+  preco_unitario Float
+  qtd_estoque    Float
+  categoria_id   String       @db.ObjectId
+  categoria      Categoria    @relation(fields: [categoria_id], references: [id])
+  fornecedores   Fornecedor[] @relation(fields: [fornecedor_ids], references: [id])
+  fornecedor_ids String[]     @db.ObjectId
 }
