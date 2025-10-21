@@ -171,6 +171,14 @@ exports.Prisma.ProdutoScalarFieldEnum = {
   fornecedor_ids: 'fornecedor_ids'
 };
 
+exports.Prisma.ItemPedidoScalarFieldEnum = {
+  id: 'id',
+  num_item: 'num_item',
+  quantidade: 'quantidade',
+  produto_id: 'produto_id',
+  pedido_id: 'pedido_id'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -187,7 +195,8 @@ exports.Prisma.ModelName = {
   Cliente: 'Cliente',
   Fornecedor: 'Fornecedor',
   Pedido: 'Pedido',
-  Produto: 'Produto'
+  Produto: 'Produto',
+  ItemPedido: 'ItemPedido'
 };
 
 /**

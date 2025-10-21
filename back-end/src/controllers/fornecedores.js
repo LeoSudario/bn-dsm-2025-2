@@ -1,4 +1,5 @@
 import prisma from '../database/client.js'
+import { includeRelations } from '../lib/utils.js'
 
 const controller = {}   // Objeto vazio
 
@@ -26,11 +27,16 @@ controller.create = async function(req, res) {
   }
 }
 
+
 controller.retrieveAll = async function(req, res) {
   try {
-    // Manda buscar todas os fornecedores cadastradas no BD
-    const result = await prisma.fornecedor.findMany({
-      orderBy: [ { nome_fantasia: 'asc' }]  // Ordem ASCendente
+
+    const include = includeRelations(req.query)
+
+    // Manda buscar todas os produtos cadastradas no BD
+    const result = await prisma.produto.findMany({
+      include,
+      orderBy: [ { nome: 'asc' }]  // Ordem ASCendente
     })
 
     // Retorna os dados obtidos ao cliente com o status
@@ -47,12 +53,19 @@ controller.retrieveAll = async function(req, res) {
   }
 }
 
+
+
+
 controller.retrieveOne = async function(req, res) {
   try {
+
+    const include = includeRelations(req.query)
+
     // Manda recuperar o documento no servidor de BD
     // usando como critério um id informado no parâmetro
     // da requisição
-    const result = await prisma.fornecedor.findUnique({
+    const result = await prisma.produto.findUnique({
+      include,
       where: { id: req.params.id }
     })
 
@@ -70,6 +83,8 @@ controller.retrieveOne = async function(req, res) {
     res.status(500).send(error)
   }
 }
+
+
 
 controller.update = async function(req, res) {
   try {
